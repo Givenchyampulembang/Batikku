@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text.trim(),
       );
       await Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomeBottomNavigationBar(),
+        builder: (context) => const HomeBottomNavigationBar(),
       ));
       setState(() {});
     } catch (e) {
@@ -37,14 +37,14 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Sign In Error'),
+            title: const Text('Sign In Error'),
             content: Text(e.toString()),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -70,22 +70,22 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Konfirmasi'),
-                content: Text('Anda ingin keluar dari aplikasi?'),
+                title: const Text('Konfirmasi'),
+                content: const Text('Anda ingin keluar dari aplikasi?'),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                       backPressCount = 0;
                     },
-                    child: Text('No'),
+                    child: const Text('No'),
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                       SystemNavigator.pop(); // Keluar dari aplikasi
                     },
-                    child: Text('Yes'),
+                    child: const Text('Yes'),
                   ),
                 ],
               );
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
                   // Hello Again
                   Text(
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white60,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Text(
                     'Before using this apps you must login !',
                     style: GoogleFonts.poppins(
@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
 
                   // email Textfield
 
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.only(left: 25.0),
                         child: TextField(
                           controller: _emailController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Email',
                           ),
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   // Password TextField
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextField(
                           controller: _passwordController,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Password',
                           ),
@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   //   forgot password
                   Padding(
@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return ForgotPasswordPage();
+                                  return const ForgotPasswordPage();
                                 },
                               ),
                             );
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   //sign in button
 
@@ -218,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                           Colors.grey, // Warna highlight ketika tombol ditekan
                       borderRadius: BorderRadius.circular(12),
                       child: Container(
-                        padding: EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(20.0),
                         decoration: BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.circular(12),
@@ -237,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
 
                   //not a member? register now
                   Row(

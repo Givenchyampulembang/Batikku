@@ -27,7 +27,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               content: Text("Password reset link sent! Check your email"),
             );
           });
@@ -66,7 +66,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Container(
@@ -79,7 +79,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 padding: const EdgeInsets.only(left: 25.0),
                 child: TextField(
                   controller: _emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Email',
                   ),
@@ -87,16 +87,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           MaterialButton(
             onPressed: passwordReset,
+            color: Colors.lightGreen,
             child: Text(
               "Reset Password",
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
               ),
             ),
-            color: Colors.lightGreen,
           ),
         ],
       ),

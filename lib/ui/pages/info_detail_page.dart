@@ -1,13 +1,12 @@
 import 'package:batikku/model/batik_detail_model.dart';
 import 'package:batikku/shared/theme.dart';
 import 'package:batikku/ui/pages/info_add_data_page.dart';
-import 'package:batikku/ui/pages/profile_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class InfoDetailPage extends StatefulWidget {
-  InfoDetailPage({super.key, required this.result});
+  const InfoDetailPage({super.key, required this.result});
   final int result;
 
   @override
@@ -20,7 +19,7 @@ class _InfoDetailPageState extends State<InfoDetailPage> {
   List<BatikDetailModel> mappingDesc = [];
   getDataFromFirebase() async {
     final data = await FirebaseFirestore.instance.collection("data").get();
-    data.docs.forEach((element) {
+    for (var element in data.docs) {
       final newItem = BatikDetailModel(
         int.parse(element['id']),
         element["name"],
@@ -29,7 +28,7 @@ class _InfoDetailPageState extends State<InfoDetailPage> {
         element["price"],
       );
       mappingDesc.add(newItem);
-    });
+    }
     setState(() {});
   }
 

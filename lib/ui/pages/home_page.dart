@@ -144,117 +144,119 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         backgroundColor: lightBackgroundColor,
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: !cameraController!.value.isInitialized
-                    ? Container()
-                    : AspectRatio(
-                        aspectRatio: cameraController!.value.aspectRatio,
-                        child: CameraPreview(cameraController!),
-                      ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: Text(
-                output,
-                // mapping["${average}"] ?? "....",
-                style: blackTextStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: bold,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: !cameraController!.value.isInitialized
+                      ? Container()
+                      : AspectRatio(
+                          aspectRatio: cameraController!.value.aspectRatio,
+                          child: CameraPreview(cameraController!),
+                        ),
                 ),
               ),
-            ),
-
-            const SizedBox(
-              height: 40,
-            ),
-            // menampilkan hasil prediksi dengan menggunakan nama saja
-            // jaga2 kalau baru running nilainya null, maka return container
-            Builder(builder: (context) {
-              if (average == null) return Container();
-              return Container(
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
                 child: Text(
-                  // output,
-                  mapping["$average"] ?? "....",
+                  output,
+                  // mapping["${average}"] ?? "....",
                   style: blackTextStyle.copyWith(
                     fontSize: 20,
                     fontWeight: bold,
                   ),
                 ),
-              );
-            }),
+              ),
 
-            // menampilkan detail hasil prediksi dengan menggunakan nama saja
-            // jaga2 kalau baru running nilainya null, maka return container
-            Builder(builder: (context) {
-              if (average == null) return Container();
-              return Container(
-                child: Text(
-                  // output,
-                  mappingDesc["$average"] ?? "....",
-                  style: blackTextStyle.copyWith(
-                    fontSize: 20,
-                    fontWeight: bold,
-                  ),
-                ),
-              );
-            }),
-            const SizedBox(
-              height: 5,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (results.average() != null) {
-                  // Saat pindah halaman DetailPage, memberhentikan fungsi kamera
-                  cameraController?.stopImageStream();
-                  Navigator.of(context)
-                      .push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          InfoDetailPage(result: results.average()!),
+              const SizedBox(
+                height: 40,
+              ),
+              // menampilkan hasil prediksi dengan menggunakan nama saja
+              // jaga2 kalau baru running nilainya null, maka return container
+              Builder(builder: (context) {
+                if (average == null) return Container();
+                return Container(
+                  child: Text(
+                    // output,
+                    mapping["$average"] ?? "....",
+                    style: blackTextStyle.copyWith(
+                      fontSize: 20,
+                      fontWeight: bold,
                     ),
-                  )
-                      .then(
-                    (_) {
-                      // Saat kembali dari halaman DetailPage, aktifkan kembali fungsi kamera
-                      loadCamera();
-                    },
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Try again"),
-                    duration: Duration(seconds: 4),
-                  ));
-                }
-              },
-              style: TextButton.styleFrom(
-                backgroundColor:
-                    brownBackgroundColor, // Warna latar belakang tombol
-                shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(56), // Jari-jari border tombol
-                ),
+                  ),
+                );
+              }),
+
+              // menampilkan detail hasil prediksi dengan menggunakan nama saja
+              // jaga2 kalau baru running nilainya null, maka return container
+              Builder(builder: (context) {
+                if (average == null) return Container();
+                return Container(
+                  child: Text(
+                    // output,
+                    mappingDesc["$average"] ?? "....",
+                    style: blackTextStyle.copyWith(
+                      fontSize: 20,
+                      fontWeight: bold,
+                    ),
+                  ),
+                );
+              }),
+              const SizedBox(
+                height: 5,
               ),
-              child: Text("Baca selengkapnya",
-                  style: whiteTextStyle.copyWith(
-                    fontSize: 12,
-                    fontWeight: semiBold,
-                  )),
-            ),
-            // button reset manual kalau diperlukan
-            // ElevatedButton(
-            //   onPressed: resetResult,
-            //   child: Text("Reset"),
-            // ),
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  if (results.average() != null) {
+                    // Saat pindah halaman DetailPage, memberhentikan fungsi kamera
+                    cameraController?.stopImageStream();
+                    Navigator.of(context)
+                        .push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            InfoDetailPage(result: results.average()!),
+                      ),
+                    )
+                        .then(
+                      (_) {
+                        // Saat kembali dari halaman DetailPage, aktifkan kembali fungsi kamera
+                        loadCamera();
+                      },
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Try again"),
+                      duration: Duration(seconds: 4),
+                    ));
+                  }
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor:
+                      brownBackgroundColor, // Warna latar belakang tombol
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(56), // Jari-jari border tombol
+                  ),
+                ),
+                child: Text("Baca selengkapnya",
+                    style: whiteTextStyle.copyWith(
+                      fontSize: 12,
+                      fontWeight: semiBold,
+                    )),
+              ),
+              // button reset manual kalau diperlukan
+              // ElevatedButton(
+              //   onPressed: resetResult,
+              //   child: Text("Reset"),
+              // ),
+            ],
+          ),
         ),
       ),
     );

@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         '/onboardingpage': (context) => const OnboardingPage(),
         '/homepage': (context) => const HomePage(),
         '/homenav': (context) => const HomeBottomNavigationBar(),
-        '/detailpage': (context) => InfoDetailPage(result: 0),
+        '/detailpage': (context) => const InfoDetailPage(result: 0),
       },
     );
   }

@@ -37,7 +37,7 @@ class _SplashPageState extends State<SplashPage>
         if (user != null) {
           print("replace");
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => HomeBottomNavigationBar(),
+            builder: (context) => const HomeBottomNavigationBar(),
           ));
         } else {
           Navigator.of(context).pushReplacementNamed('/onboardingpage');

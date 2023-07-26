@@ -34,7 +34,7 @@ class _InfoAddDataPageState extends State<InfoAddDataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Data"),
+        title: const Text("Add Data"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -43,40 +43,40 @@ class _InfoAddDataPageState extends State<InfoAddDataPage> {
             children: [
               TextField(
                 controller: idController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text("id"),
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text("Nama"),
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: descController,
                 maxLines: 4,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   alignLabelWithHint: true,
                   label: Text("Desc"),
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: priceController,
                 maxLines: 4,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   alignLabelWithHint: true,
                   label: Text("Price"),
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   FirebaseFirestore.instance
@@ -90,7 +90,7 @@ class _InfoAddDataPageState extends State<InfoAddDataPage> {
                   });
                   Navigator.pop(context);
                 },
-                child: Text("Simpan"),
+                child: const Text("Simpan"),
               )
             ],
           ),

@@ -30,7 +30,6 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getDataFromFirebase();
     getDataUserFromFirebase();
@@ -41,81 +40,69 @@ class _InfoPageState extends State<InfoPage> {
     return Scaffold(
       floatingActionButton: !isAdmin
           ? Container()
-          : FloatingActionButton(onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => InfoAddDataPage(),
-              ));
-            }),
+          : FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const InfoAddDataPage(),
+                ));
+              },
+            ),
       appBar: AppBar(
         leading: Container(),
       ),
       body: FutureBuilder(
-          future: getDataFromFirebase(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text("Error");
-            }
-            if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
-            }
-            final datas = snapshot.data?.docs;
-            // print(data);
-            return ListView.builder(
-                itemCount: (datas ?? []).length,
-                itemBuilder: (context, i) {
-                  final data = datas![i].data();
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            InfoDetailPage(result: int.parse(data?['id'])),
-                      ));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Row(
-                            children: [
-                              Column(
+        future: getDataFromFirebase(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text("Error");
+          }
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final datas = snapshot.data?.docs;
+          // print(data);
+          return SingleChildScrollView(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: (datas ?? []).length,
+              itemBuilder: (context, i) {
+                final data = datas![i].data();
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => InfoDetailPage(
+                        result: int.parse(data['id']),
+                      ),
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(data?['name'] ?? ""),
-                                  Text(data?['desc'].toString() ?? ""),
-                                  // Text(data?['price'] ?? ""),
-                                  // Text(data?['last_name'] ?? ""),
-                                  // Text("Masuk Sebagai : " + user.email!),
-                                  // SizedBox(height: 20),
-                                  // MaterialButton(
-                                  //   onPressed: () {
-                                  //     FirebaseAuth.instance.signOut();
-                                  //     Navigator.pushAndRemoveUntil(
-                                  //       context,
-                                  //       MaterialPageRoute(
-                                  //         builder: (context) => LoginPage(
-                                  //           showRegisterPage: () {
-                                  //             Navigator.pushNamed(context, '/registerpage');
-                                  //           },
-                                  //         ),
-                                  //       ),
-                                  //       (route) => false,
-                                  //     );
-                                  //   },
-                                  //   color: Colors.redAccent,
-                                  //   child: Text('Sign Out'),
-                                  // ),
+                                  Text(data['name'] ?? ""),
+                                  Text(data['desc'].toString() ?? ""),
                                 ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  );
-                });
-          }),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
